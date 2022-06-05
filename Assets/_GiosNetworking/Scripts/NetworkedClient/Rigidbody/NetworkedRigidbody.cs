@@ -46,6 +46,11 @@ namespace ClientSidePrediction.RB
             MoveToScene(_idleScene);
         }
 
+        public override int GetPredictionEnabled(RigidbodyInput input)
+        {
+            return 0;
+        }
+
         protected override RigidbodyState RecordState(uint lastProcessedInputTick)
         {
             return new RigidbodyState(transform.position, _rigidbody.velocity, _rigidbody.angularVelocity, transform.rotation, lastProcessedInputTick);

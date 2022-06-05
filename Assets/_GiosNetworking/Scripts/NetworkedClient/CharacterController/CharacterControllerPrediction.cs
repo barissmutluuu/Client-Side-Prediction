@@ -12,8 +12,24 @@ namespace ClientSidePrediction.CC
                 x = Input.GetAxis("Horizontal"),
                 y = Input.GetAxis("Vertical")
             };
-            
-            return new CharacterControllerInput(__inputs, currentTick, deltaTime);
+
+            int predictionEnabled = 0;
+
+            if (Input.GetKey("o"))
+            {
+                predictionEnabled = 1;
+            }else if (Input.GetKey("p"))
+            {
+                predictionEnabled = 0;
+            }
+            else
+            {
+                predictionEnabled = 3;
+            }
+
+           
+
+            return new CharacterControllerInput(__inputs, currentTick, deltaTime, predictionEnabled);
         }
     }
 }

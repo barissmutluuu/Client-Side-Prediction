@@ -12,6 +12,7 @@ namespace ClientSidePrediction
         [Header("Prediction/Settings")] 
         [SerializeField, Tooltip("The number of ticks to be stored in the input and state buffers")]
         uint _bufferSize = 1024;
+        bool predictionEnabled = false;
         
         NetworkedClient<TClientInput, TClientState> _client = null;
         TClientInput[] _inputBuffer;
@@ -29,10 +30,23 @@ namespace ClientSidePrediction
  
         public void HandleTick(float deltaTime, uint currentTick, TClientState latestServerState)
         {
-            if(!_identity.isServer && (latestServerState != null && (_lastProcessedState == null || !_lastProcessedState.Equals(latestServerState))))
+            if(!_identity.isServer && (latestServerState != null && (_lastProcessedState == null || !_lastProcessedState.Equals(latestServerState)))) { 
                 UpdatePrediction(currentTick, latestServerState);
+            }
 
             var __input = GetInput(deltaTime, currentTick);
+
+            if (_client.GetPredictionEnabled(__input) == 1)
+            {
+                predictionEnabled = true;
+            }else if (_client.GetPredictionEnabled(__input) == 0)
+            {
+                predictionEnabled = false;
+            }
+            else
+            {
+
+            }
 
             var __bufferIndex = currentTick % _bufferSize;
 
@@ -40,8 +54,12 @@ namespace ClientSidePrediction
             
             _client.SendClientInput(__input);
             
+            if (predictionEnabled) {
             if(!_identity.isServer)
                 _client.ProcessInput(__input);
+            }
+
+
         }
 
         protected abstract TClientInput GetInput(float deltaTime, uint currentTick);
@@ -52,6 +70,7 @@ namespace ClientSidePrediction
             
             _client.SetState(_lastProcessedState);
 
+            if (predictionEnabled) { 
             var __firstTickToReprocess = _lastProcessedState.LastProcessedInputTick + 1;
 
             if (__firstTickToReprocess < currentTick)
@@ -65,6 +84,8 @@ namespace ClientSidePrediction
                     var __input = _inputBuffer[__index];
                     _client.ProcessInput(__input);
                 }
+            }
+
             }
         }
     }

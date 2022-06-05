@@ -11,12 +11,14 @@ namespace ClientSidePrediction.CC
         public uint tick;
         public Vector2 input;
         public float deltaTime;
+        public int predictionEnabled;
 
-        public CharacterControllerInput(Vector2 input, uint tick, float deltaTime)
+        public CharacterControllerInput(Vector2 input, uint tick, float deltaTime, int predictionEnabled)
         {
             this.input = input;
             this.tick = tick;
             this.deltaTime = deltaTime;
+            this.predictionEnabled = predictionEnabled;
         }
     }
 }

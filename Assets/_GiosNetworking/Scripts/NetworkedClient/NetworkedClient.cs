@@ -22,6 +22,7 @@ namespace ClientSidePrediction
         float _timeSinceLastTick = 0f;
         uint _lastProcessedInputTick = 0;
         uint _currentTick = 0;
+        public int predictionEnabled = 3;
 
         void Awake()
         {
@@ -53,6 +54,8 @@ namespace ClientSidePrediction
         public abstract void SetState(TClientState state);
 
         public abstract void ProcessInput(TClientInput input);
+
+        public abstract int GetPredictionEnabled(TClientInput input);
 
         public void SendClientInput(TClientInput input)
         {

@@ -30,6 +30,11 @@ namespace ClientSidePrediction.CC
             _characterController.Move(__movement * input.deltaTime);
         }
 
+        public override int GetPredictionEnabled(CharacterControllerInput input)
+        {
+              return input.predictionEnabled;
+        }
+
         protected override CharacterControllerState RecordState(uint lastProcessedInputTick)
         {
             return new CharacterControllerState(_characterController.transform.position, _verticalVelocity, lastProcessedInputTick);   

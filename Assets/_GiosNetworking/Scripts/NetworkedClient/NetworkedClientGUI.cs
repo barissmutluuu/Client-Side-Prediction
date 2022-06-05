@@ -17,7 +17,7 @@ namespace ClientSidePrediction
         GameObject _phantom;
         Camera _camera;
         int _targetFPS = 64;
-        bool _drawPhantom = false;
+        bool _drawPhantom = true;
 
         void Awake()
         {
