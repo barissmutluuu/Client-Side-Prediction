@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using System.Collections;
+using UnityEngine;
 
 namespace ClientSidePrediction.CC
 {
@@ -8,7 +10,9 @@ namespace ClientSidePrediction.CC
         [SerializeField] CharacterController _characterController = null;
         [Header("CharacterController/Settings")]
         [SerializeField] float _speed = 10f;
-        float _verticalVelocity = 0f; 
+        float _verticalVelocity = 0f;
+        public GameObject bulletPrefab;
+        public bool shootable = true;
 
         public override void SetState(CharacterControllerState state)
         {
@@ -20,6 +24,16 @@ namespace ClientSidePrediction.CC
 
         public override void ProcessInput(CharacterControllerInput input)
         {
+            if (input.fired == true && shootable == true )
+            {
+                Debug.Log("girdimm1");
+                GetComponent<Shooter>().ShootCMD();
+
+                shootable = false;
+                StartCoroutine(ShootableAfter2sc());
+            }
+
+
             var __movement = new Vector3(input.input.x, 0f, input.input.y);
             __movement = Vector3.ClampMagnitude(__movement, 1f) * _speed;
             if (!_characterController.isGrounded)
@@ -28,6 +42,19 @@ namespace ClientSidePrediction.CC
                 _verticalVelocity = Physics.gravity.y;
             __movement.y = _verticalVelocity;
             _characterController.Move(__movement * input.deltaTime);
+        }
+
+
+        public IEnumerator ShootableAfter2sc()
+        {
+            yield return new WaitForSeconds(0.3f);
+            shootable = true;
+        }
+
+        public IEnumerator DestroyBulletAfter3sc(GameObject bullet)
+        {
+            yield return new WaitForSeconds(3f);
+            Destroy(bullet);
         }
 
         public override int GetPredictionEnabled(CharacterControllerInput input)

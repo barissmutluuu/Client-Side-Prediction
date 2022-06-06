@@ -14,9 +14,15 @@ namespace ClientSidePrediction.CC
             };
 
             int predictionEnabled = 0;
+            bool fired = false; 
+
+            if (Input.GetKey("space"))
+            {
+                fired = true;
+            }
 
             if (Input.GetKey("o"))
-            {
+            { 
                 predictionEnabled = 1;
             }else if (Input.GetKey("p"))
             {
@@ -29,7 +35,7 @@ namespace ClientSidePrediction.CC
 
            
 
-            return new CharacterControllerInput(__inputs, currentTick, deltaTime, predictionEnabled);
+            return new CharacterControllerInput(__inputs, currentTick, deltaTime, predictionEnabled,fired);
         }
     }
 }

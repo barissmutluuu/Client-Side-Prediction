@@ -54,10 +54,10 @@ namespace ClientSidePrediction
             
             _client.SendClientInput(__input);
             
-            if (predictionEnabled) {
+            //if (predictionEnabled) {
             if(!_identity.isServer)
                 _client.ProcessInput(__input);
-            }
+            //}
 
 
         }

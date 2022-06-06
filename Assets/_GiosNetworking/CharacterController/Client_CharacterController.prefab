@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: -4762122087075154557}
   - component: {fileID: 5290404675167349142}
   - component: {fileID: 4200619113329964333}
+  - component: {fileID: -1890021368181563852}
   m_Layer: 0
   m_Name: Client_CharacterController
   m_TagString: Untagged
@@ -165,8 +166,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _identity: {fileID: 5188877783114592408}
+  predictionEnabled: 3
   _characterController: {fileID: 1725576858770373524}
   _speed: 10
+  bulletPrefab: {fileID: 3803619163101427150, guid: b4a9ff4533c405345b1b0b1c7bd70cf5,
+    type: 3}
+  shootable: 1
+  Shooter: {fileID: 0}
 --- !u!114 &-4762122087075154557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,3 +219,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+--- !u!114 &-1890021368181563852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5099188760158918858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0c94e2d88d0e5448ca87bb7db4ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  bulletPrefab: {fileID: 3803619163101427150, guid: b4a9ff4533c405345b1b0b1c7bd70cf5,
+    type: 3}
