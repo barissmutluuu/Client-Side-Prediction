@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+using UnityEngine.UI;
+
 public class TargetMove : NetworkBehaviour
 {
     public Transform start;
@@ -10,6 +12,7 @@ public class TargetMove : NetworkBehaviour
     public GameObject TargetPrefab;
     [SerializeField] NetworkIdentity _identity = null;
     public int score;
+    public Text Scoreboard;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,7 @@ public class TargetMove : NetworkBehaviour
         //Debug.Log("girdim");
             start = GameObject.Find("StartPoint").transform;
         end = GameObject.Find("EndPoint").transform;
+        Scoreboard = GameObject.Find("Scoreboard").GetComponent<Text>();
         TargetMoveCMD();
         //}
     }
@@ -26,7 +30,7 @@ public class TargetMove : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Scoreboard.text = score.ToString();
     }
 
     public void TargetMoveCMD()
@@ -61,5 +65,10 @@ public class TargetMove : NetworkBehaviour
         }
 
         StartCoroutine(WaitAndMoveStartToEnd(1f));
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        score = score + 1;
     }
 }

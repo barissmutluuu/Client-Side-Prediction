@@ -18,7 +18,7 @@ public  class Shooter : NetworkBehaviour
         
     }
 
-    [ClientRpc]
+    [Command]
     public void ShootCMD()
     {
 
