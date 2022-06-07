@@ -30,6 +30,8 @@ namespace ClientSidePrediction
  
         public void HandleTick(float deltaTime, uint currentTick, TClientState latestServerState)
         {
+
+
             if(!_identity.isServer && (latestServerState != null && (_lastProcessedState == null || !_lastProcessedState.Equals(latestServerState)))) { 
                 UpdatePrediction(currentTick, latestServerState);
             }
@@ -46,6 +48,12 @@ namespace ClientSidePrediction
             else
             {
 
+            }
+
+
+            if (_client.GetResetScoreClicked(__input) == true)
+            {
+                _client.ResetScoreCmd();
             }
 
             var __bufferIndex = currentTick % _bufferSize;
@@ -68,7 +76,11 @@ namespace ClientSidePrediction
         {
             _lastProcessedState = latestServerState;
             
+
+
             _client.SetState(_lastProcessedState);
+
+
 
             if (predictionEnabled) { 
             var __firstTickToReprocess = _lastProcessedState.LastProcessedInputTick + 1;

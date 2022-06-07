@@ -17,6 +17,7 @@ public class TargetSpawner : NetworkBehaviour
         {
 
            GameObject target = Instantiate(targetPrefab,startPos.transform.position, Quaternion.identity);
+            target.name = "Target";
            NetworkServer.Spawn(target.gameObject);
         }
 

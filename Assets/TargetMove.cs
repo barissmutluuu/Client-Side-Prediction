@@ -15,22 +15,31 @@ public class TargetMove : NetworkBehaviour
     public Text Scoreboard;
 
     // Start is called before the first frame update
+
+    void Awake()
+    {
+
+        Scoreboard = GameObject.Find("Scoreboard").GetComponent<Text>();
+        score = 0;
+        start = GameObject.Find("StartPoint").transform;
+        end = GameObject.Find("EndPoint").transform;
+    }
     void Start()
     {
         //if (_identity.isServer)
         //{
         //Debug.Log("girdim");
-            start = GameObject.Find("StartPoint").transform;
-        end = GameObject.Find("EndPoint").transform;
-        Scoreboard = GameObject.Find("Scoreboard").GetComponent<Text>();
-        TargetMoveCMD();
+        if (isServer)
+        {
+            TargetMoveCMD();
+        }
         //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        Scoreboard.text = score.ToString();
+
     }
 
     public void TargetMoveCMD()
@@ -70,5 +79,8 @@ public class TargetMove : NetworkBehaviour
     void OnCollisionEnter(Collision collision)
     {
         score = score + 1;
+
+        Scoreboard.text = score.ToString();
+
     }
 }

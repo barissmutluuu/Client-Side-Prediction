@@ -57,9 +57,16 @@ namespace ClientSidePrediction
 
         public abstract int GetPredictionEnabled(TClientInput input);
 
+        public abstract bool GetResetScoreClicked(TClientInput input);
+
         public void SendClientInput(TClientInput input)
         {
             _messenger.SendInput(input);
+        }
+
+        public void ResetScoreCmd()
+        {
+            _messenger.ResetScore();
         }
 
         protected abstract TClientState RecordState(uint lastProcessedInputTick);

@@ -50,6 +50,10 @@ namespace ClientSidePrediction.RB
         {
             return 0;
         }
+        public override bool GetResetScoreClicked(RigidbodyInput input)
+        {
+            return false;
+        }
 
         protected override RigidbodyState RecordState(uint lastProcessedInputTick)
         {

@@ -1,5 +1,7 @@
 ﻿using System;
 using Mirror;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace ClientSidePrediction.CC
 {
@@ -20,17 +22,30 @@ namespace ClientSidePrediction.CC
         {
             CmdSendInput(input);
         }
+
+        public  void ResetScore()
+        {
+            CmdResetScore();
+        }
         
         [ClientRpc(channel = Channels.Unreliable)]
         void RpcSendState(CharacterControllerState state)
         {
             _latestServerState = state;
         }
+
         
         [Command(channel = Channels.Unreliable)]
         void CmdSendInput(CharacterControllerInput input)
         {
             OnInputReceived?.Invoke(input);
+        }
+        [Command(channel = Channels.Unreliable)]
+        void CmdResetScore()
+        {
+            GameObject.Find("Scoreboard").GetComponent<Text>().text="0";
+            GameObject.Find("Target").GetComponent<TargetMove>().score = 0;
+
         }
     }
 }

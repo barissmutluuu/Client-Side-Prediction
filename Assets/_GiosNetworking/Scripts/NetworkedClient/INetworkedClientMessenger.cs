@@ -13,5 +13,7 @@
         void SendState(TClientState state);
 
         void SendInput(TClientInput input);
+
+        void ResetScore();
     }
 }

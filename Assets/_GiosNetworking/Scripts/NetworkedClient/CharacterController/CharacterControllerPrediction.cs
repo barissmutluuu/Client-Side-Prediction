@@ -14,7 +14,8 @@ namespace ClientSidePrediction.CC
             };
 
             int predictionEnabled = 0;
-            bool fired = false; 
+            bool fired = false;
+            bool resetScore = false;
 
             if (Input.GetKey("space"))
             {
@@ -33,9 +34,13 @@ namespace ClientSidePrediction.CC
                 predictionEnabled = 3;
             }
 
+            if (Input.GetKey("r")) {
+                resetScore = true;
+            }
+
            
 
-            return new CharacterControllerInput(__inputs, currentTick, deltaTime, predictionEnabled,fired);
+            return new CharacterControllerInput(__inputs, currentTick, deltaTime, predictionEnabled,fired,resetScore);
         }
     }
 }

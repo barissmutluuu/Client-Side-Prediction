@@ -20,6 +20,10 @@ namespace ClientSidePrediction.RB
         {
             CmdSendInput(input);
         }
+        public void ResetScore()
+        {
+           
+        }
 
         [ClientRpc(channel = Channels.Unreliable)]
         void RpcSendState(RigidbodyState state)
@@ -31,6 +35,12 @@ namespace ClientSidePrediction.RB
         void CmdSendInput(RigidbodyInput state)
         {
             OnInputReceived?.Invoke(state);
+        }
+
+        [Command(channel = Channels.Unreliable)]
+        void CmdResetScore(RigidbodyInput state)
+        {
+            int a = 1;
         }
     }
 }

@@ -11,12 +11,14 @@ namespace ClientSidePrediction.CC
         public Vector3 position;
         public float verticalVelocity;
         public uint lastProcessedInput;
+        public int score;
 
-        public CharacterControllerState(Vector3 position, float verticalVelocity, uint lastProcessedInput)
+        public CharacterControllerState(Vector3 position, float verticalVelocity, uint lastProcessedInput,  int score)
         {
             this.position = position;
             this.verticalVelocity = verticalVelocity;
             this.lastProcessedInput = lastProcessedInput;
+            this.score = score;
         }
 
         public bool Equals(CharacterControllerState other)
