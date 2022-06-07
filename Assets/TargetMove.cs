@@ -9,15 +9,18 @@ public class TargetMove : NetworkBehaviour
     public Transform end;
     public GameObject TargetPrefab;
     [SerializeField] NetworkIdentity _identity = null;
+    public int score;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (_identity.isServer)
-        {
-            Debug.Log("girdim");
-            TargetMoveCMD();
-        }
+        //if (_identity.isServer)
+        //{
+        //Debug.Log("girdim");
+            start = GameObject.Find("StartPoint").transform;
+        end = GameObject.Find("EndPoint").transform;
+        TargetMoveCMD();
+        //}
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class TargetMove : NetworkBehaviour
 
     public void TargetMoveCMD()
     {
-        NetworkServer.Spawn(TargetPrefab);
+        //NetworkServer.Spawn(TargetPrefab);
         StartCoroutine(WaitAndMoveStartToEnd(1f));
     }
     

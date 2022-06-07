@@ -18,14 +18,16 @@ public  class Shooter : NetworkBehaviour
         
     }
 
+    [ClientRpc]
     public void ShootCMD()
     {
 
         Debug.Log("girdimm2");
         GameObject bullet = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z + 1f), Quaternion.identity);
+        NetworkServer.Spawn(bullet.gameObject);
         bullet.transform.forward = new Vector3(0f, 0f, 10f);
         bullet.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, 50f), ForceMode.Impulse);
-        NetworkServer.Spawn(bullet);
+        
 
 
         StartCoroutine(DestroyBulletAfter3sc(bullet));
